@@ -1,6 +1,7 @@
 import pygame
+import sys
 from constants import *
-from logger import log_state
+from logger import log_state, log_event
 from player import *
 from asteroid import *
 from asteroidfield import AsteroidField
@@ -27,6 +28,11 @@ Screen height: {SCREEN_HEIGHT}""")
             if event.type == pygame.QUIT:
                 return
         updatable.update(dt)
+        for obj in asteroids:
+            if obj.collides_with(player):
+                log_event("player_hit")
+                print("Game over!")
+                sys.exit()
         screen.fill("black")
         for thing in drawable:
             thing.draw(screen) # after filling screen, but before flipping the screen
