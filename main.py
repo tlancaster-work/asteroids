@@ -36,6 +36,11 @@ Screen height: {SCREEN_HEIGHT}""")
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
+            for obj2 in shots:
+                if obj.collides_with(obj2):
+                    log_event("asteroid_shot")
+                    obj.kill()
+                    obj2.kill()
         screen.fill("black")
         for thing in drawable:
             thing.draw(screen) # after filling screen, but before flipping the screen
